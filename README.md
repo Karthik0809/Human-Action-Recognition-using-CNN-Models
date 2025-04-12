@@ -77,4 +77,16 @@ The model is deployed using **Streamlit** for an interactive web application. Fe
    ```sh
    streamlit run pro.py
    ```
+   
+## Future Improvements
+- Fine-tune hyperparameters for better performance  
+- Integrate attention mechanisms  
+- Use transformer-based vision models (e.g., ViT, Swin Transformer)  
+- Improve model generalization with data augmentation  
+- Enable webcam-based real-time action recognition  
 
+## Status
+Continuing work is underway to improve model accuracy and expand real-time inference capabilities.
+
+## Author  
+[**Karthik Mulugu**](https://www.linkedin.com/in/karthikmulugu/)
