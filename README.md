@@ -13,7 +13,7 @@
 - [Overview](#overview)
 - [Dataset](#dataset)
 - [Project Structure](#project-structure)
-- [Models & Results](#models--results)
+- [Models and Results](#models-and-results)
 - [Hyperparameters](#hyperparameters)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -25,7 +25,7 @@
 
 ## Overview
 
-This project trains and evaluates four CNN architectures — built from scratch and fine-tuned from ImageNet pretrained weights — to classify 40 human action categories from still images. The best models (VGG-16 and DenseNet-121 pretrained) achieve **~77–78% test accuracy** on the Stanford 40 dataset.
+This project trains and evaluates four CNN architectures on 40 human action categories from still images. Models are either trained from scratch or fine-tuned from ImageNet pretrained weights. The best models (VGG-16 and DenseNet-121 pretrained) achieve approximately 77-78% test accuracy on the Stanford 40 dataset.
 
 ---
 
@@ -36,7 +36,7 @@ This project trains and evaluates four CNN architectures — built from scratch 
 | Name | [Stanford 40 Action Dataset](http://vision.stanford.edu/Datasets/40actions.html) |
 | Total Images | 9,532 |
 | Classes | 40 human actions |
-| Images per class | 180 – 300 |
+| Images per class | 180 - 300 |
 | Split | 75% Train / 15% Val / 10% Test |
 
 <details>
@@ -47,7 +47,7 @@ This project trains and evaluates four CNN architectures — built from scratch 
 </details>
 
 **Preprocessing:**
-- Resize to **224 × 224** pixels
+- Resize to **224 x 224** pixels
 - Normalize with ImageNet stats: `mean=[0.485, 0.456, 0.406]`, `std=[0.229, 0.224, 0.225]`
 
 ---
@@ -67,44 +67,51 @@ This project trains and evaluates four CNN architectures — built from scratch 
     ├── train.py            # train_model() and evaluate_model()
     ├── utils.py            # Plotting utilities (loss, accuracy, confusion matrix)
     └── models/
-        ├── vgg.py          # VGG-16 from scratch + pretrained
-        ├── resnet.py       # ResNet-50 from scratch + pretrained
-        ├── densenet.py     # DenseNet-121 from scratch + pretrained
-        └── googlenet.py    # GoogLeNet from scratch + pretrained
+        ├── vgg.py          # VGG-16 custom implementation + pretrained weights
+        ├── resnet.py       # ResNet-50 custom implementation + pretrained weights
+        ├── densenet.py     # DenseNet-121 from scratch and pretrained
+        └── googlenet.py    # GoogLeNet from scratch and pretrained
 ```
 
 ---
 
-## Models & Results
+## Models and Results
 
-### From Scratch
+### Fine-Tuned from ImageNet Pretrained Weights
 
 | Model | Test Accuracy | Test Loss |
 |---|---|---|
-| **VGG-16** | **77.25%** | 0.0874 |
-| **ResNet-50** | **75.68%** | 0.0923 |
+| VGG-16 | 77.25% | 0.0874 |
+| ResNet-50 | 75.68% | 0.0923 |
+| GoogLeNet | 76.52% | — |
+| DenseNet-121 | 77.99% | — |
+
+### Trained from Scratch
+
+| Model | Test Accuracy | Test Loss |
+|---|---|---|
 | GoogLeNet | 19.60% | 0.2978 |
 | DenseNet-121 | 31.76% | 0.2473 |
 
-### Pretrained (ImageNet Fine-Tuned)
+### Pretrained Model Metrics (Weighted)
 
-| Model | Test Accuracy | Precision | Recall | F1 Score |
-|---|---|---|---|---|
-| **DenseNet-121** | **77.99%** | 79.34% | 77.99% | 77.90% |
-| GoogLeNet | 76.52% | 78.14% | 76.52% | 76.80% |
+| Model | Precision | Recall | F1 Score |
+|---|---|---|---|
+| GoogLeNet | 78.14% | 76.52% | 76.80% |
+| DenseNet-121 | 79.34% | 77.99% | 77.90% |
 
 ---
 
 ## Hyperparameters
 
-| Model | Learning Rate | Weight Decay | Epochs | Pretrained |
+| Model | Mode | Learning Rate | Weight Decay | Epochs |
 |---|---|---|---|---|
-| VGG-16 | 1e-5 | 1e-4 | 10 | ✅ |
-| ResNet-50 | 1e-4 | 1e-4 | 10 | ✅ |
-| DenseNet-121 (scratch) | 1e-3 | 1e-5 | 15 | ❌ |
-| GoogLeNet (scratch) | 1e-3 | 1e-5 | 15 | ❌ |
-| GoogLeNet (pretrained) | 1e-4 | — | 10 | ✅ |
-| DenseNet-121 (pretrained) | 1e-4 | — | 10 | ✅ |
+| VGG-16 | Pretrained | 1e-5 | 1e-4 | 10 |
+| ResNet-50 | Pretrained | 1e-4 | 1e-4 | 10 |
+| DenseNet-121 | From Scratch | 1e-3 | 1e-5 | 15 |
+| GoogLeNet | From Scratch | 1e-3 | 1e-5 | 15 |
+| GoogLeNet | Pretrained | 1e-4 | — | 10 |
+| DenseNet-121 | Pretrained | 1e-4 | — | 10 |
 
 All models use:
 - **Optimizer:** Adam
@@ -139,10 +146,10 @@ JPEGImages/
 Train any model from the command line:
 
 ```bash
-# VGG-16 (pretrained, lr=1e-5, 10 epochs)
+# VGG-16 pretrained (lr=1e-5, 10 epochs)
 python train.py --model vgg --data_dir JPEGImages
 
-# ResNet-50 (pretrained, lr=1e-4, 10 epochs)
+# ResNet-50 pretrained (lr=1e-4, 10 epochs)
 python train.py --model resnet --data_dir JPEGImages
 
 # DenseNet-121 from scratch (lr=1e-3, 15 epochs)
@@ -151,10 +158,10 @@ python train.py --model densenet --data_dir JPEGImages
 # GoogLeNet from scratch (lr=1e-3, 15 epochs)
 python train.py --model googlenet --data_dir JPEGImages
 
-# Pretrained GoogLeNet fine-tuned (lr=1e-4, 10 epochs)
+# GoogLeNet pretrained fine-tuned (lr=1e-4, 10 epochs)
 python train.py --model pretrained_googlenet --data_dir JPEGImages
 
-# Pretrained DenseNet-121 fine-tuned (lr=1e-4, 10 epochs)
+# DenseNet-121 pretrained fine-tuned (lr=1e-4, 10 epochs)
 python train.py --model pretrained_densenet --data_dir JPEGImages
 ```
 
@@ -172,7 +179,7 @@ streamlit run app.py
 
 Features:
 - Set your dataset directory from the UI
-- Live training with loss & accuracy plots
+- Live training with loss and accuracy plots
 - Predict random images with true vs. predicted labels
 
 ---
@@ -181,11 +188,11 @@ Features:
 
 | Domain | Use Case |
 |---|---|
-| Surveillance & Security | Detecting suspicious activities |
+| Surveillance and Security | Detecting suspicious activities |
 | Healthcare | Monitoring patient behavior |
-| Sports & Fitness | Analyzing exercise routines |
-| Human–Computer Interaction | Gesture recognition |
-| Robotics | Human–robot interaction |
+| Sports and Fitness | Analyzing exercise routines |
+| Human-Computer Interaction | Gesture recognition |
+| Robotics | Human-robot interaction |
 | Smart Homes | Detecting unusual behavior |
 | Education | Monitoring student engagement |
 
