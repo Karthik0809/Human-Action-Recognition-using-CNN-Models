@@ -1,0 +1,121 @@
+Device: cuda  |  AMP: enabled
+Classes (40): ['applauding', 'blowing_bubbles', 'brushing_teeth', 'cleaning_the_floor', 'climbing', 'cooking', 'cutting_trees', 'cutting_vegetables', 'drinking', 'feeding_a_horse', 'fishing', 'fixing_a_bike', 'fixing_a_car', 'gardening', 'holding_an_umbrella', 'jumping', 'looking_through_a_microscope', 'looking_through_a_telescope', 'phoning', 'playing_guitar', 'playing_violin', 'pouring_liquid', 'pushing_a_cart', 'reading', 'riding_a_bike', 'riding_a_horse', 'rowing_a_boat', 'running', 'shooting_an_arrow', 'smoking', 'taking_photos', 'texting_message', 'throwing_frisby', 'using_a_computer', 'walking_the_dog', 'washing_dishes', 'watching_TV', 'waving_hands', 'writing_on_a_board', 'writing_on_a_book']
+Train: 7149 | Val: 1429 | Test: 954
+
+=================================================================
+  RESNET50
+=================================================================
+  Parameters: 23,589,992 total
+
+  [Stage 1] Freeze backbone  |  epochs=5  lr=1e-03
+  Trainable params (head only): 81,960
+  [S1] Ep   1/5  lr=1.00e-03  Train 0.3531  Val 0.6669
+    ** Best saved  val_acc=0.6669
+  [S1] Ep   2/5  lr=1.00e-03  Train 0.5308  Val 0.6914
+    ** Best saved  val_acc=0.6914
+  [S1] Ep   3/5  lr=1.00e-03  Train 0.5632  Val 0.7152
+    ** Best saved  val_acc=0.7152
+  [S1] Ep   4/5  lr=1.00e-03  Train 0.5696  Val 0.7201
+    ** Best saved  val_acc=0.7201
+  [S1] Ep   5/5  lr=1.00e-03  Train 0.5743  Val 0.7341
+    ** Best saved  val_acc=0.7341
+
+  [Stage 2] Unfreeze all  |  epochs=45  lr=5e-05  mixup=0.4
+  Trainable params (all): 23,589,992
+  [S2] Ep   1/45  lr=5.00e-05  Train 0.3143  Val 0.7845
+    ** Best saved  val_acc=0.7845
+  [S2] Ep   2/45  lr=4.99e-05  Train 0.3395  Val 0.7992
+    ** Best saved  val_acc=0.7992
+  [S2] Ep   3/45  lr=4.98e-05  Train 0.3808  Val 0.8181
+    ** Best saved  val_acc=0.8181
+  [S2] Ep   4/45  lr=4.95e-05  Train 0.3960  Val 0.8334
+    ** Best saved  val_acc=0.8334
+  [S2] Ep   5/45  lr=4.90e-05  Train 0.4075  Val 0.8244
+  [S2] Ep   6/45  lr=4.85e-05  Train 0.3905  Val 0.8293
+  [S2] Ep   7/45  lr=4.78e-05  Train 0.4465  Val 0.8272
+  [S2] Ep   8/45  lr=4.71e-05  Train 0.3656  Val 0.8460
+    ** Best saved  val_acc=0.8460
+  [S2] Ep   9/45  lr=4.62e-05  Train 0.4326  Val 0.8432
+  [S2] Ep  10/45  lr=4.52e-05  Train 0.4715  Val 0.8509
+    ** Best saved  val_acc=0.8509
+  [S2] Ep  11/45  lr=4.42e-05  Train 0.4567  Val 0.8446
+  [S2] Ep  12/45  lr=4.30e-05  Train 0.4112  Val 0.8376
+  [S2] Ep  13/45  lr=4.17e-05  Train 0.4760  Val 0.8530
+    ** Best saved  val_acc=0.8530
+  [S2] Ep  14/45  lr=4.04e-05  Train 0.4609  Val 0.8635
+    ** Best saved  val_acc=0.8635
+  [S2] Ep  15/45  lr=3.90e-05  Train 0.4748  Val 0.8439
+  [S2] Ep  16/45  lr=3.75e-05  Train 0.4381  Val 0.8453
+  [S2] Ep  17/45  lr=3.60e-05  Train 0.4605  Val 0.8565
+  [S2] Ep  18/45  lr=3.44e-05  Train 0.4617  Val 0.8614
+  [S2] Ep  19/45  lr=3.28e-05  Train 0.4798  Val 0.8579
+  [S2] Ep  20/45  lr=3.11e-05  Train 0.4601  Val 0.8467
+  [S2] Ep  21/45  lr=2.94e-05  Train 0.4563  Val 0.8628
+  [S2] Ep  22/45  lr=2.77e-05  Train 0.5157  Val 0.8691
+    ** Best saved  val_acc=0.8691
+  [S2] Ep  23/45  lr=2.59e-05  Train 0.4854  Val 0.8579
+  [S2] Ep  24/45  lr=2.42e-05  Train 0.4077  Val 0.8530
+  [S2] Ep  25/45  lr=2.24e-05  Train 0.4760  Val 0.8649
+  [S2] Ep  26/45  lr=2.07e-05  Train 0.4840  Val 0.8607
+  [S2] Ep  27/45  lr=1.90e-05  Train 0.4727  Val 0.8649
+  [S2] Ep  28/45  lr=1.73e-05  Train 0.5003  Val 0.8586
+  [S2] Ep  29/45  lr=1.57e-05  Train 0.5083  Val 0.8621
+  [S2] Ep  30/45  lr=1.41e-05  Train 0.5020  Val 0.8586
+  [S2] Ep  31/45  lr=1.26e-05  Train 0.5327  Val 0.8621
+  [S2] Ep  32/45  lr=1.11e-05  Train 0.4893  Val 0.8677
+  Early stopping at epoch 32.
+C:\Users\karth\Desktop\MS\Sem 2\DL\Project\Human Action Recognition\train.py:337: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  ckpt = torch.load(ckpt_path, map_location=device)
+
+  Loaded best checkpoint  val_acc=0.8691
+Test Loss: 1.2062  Test Accuracy: 0.8512
+
+resnet50 — Classification Report:
+                              precision    recall  f1-score   support
+
+                  applauding       0.90      0.72      0.80        25
+             blowing_bubbles       0.86      0.92      0.89        26
+              brushing_teeth       0.75      0.80      0.77        15
+          cleaning_the_floor       1.00      0.86      0.93        22
+                    climbing       0.95      0.95      0.95        38
+                     cooking       0.84      0.70      0.76        30
+               cutting_trees       1.00      0.95      0.97        20
+          cutting_vegetables       0.75      0.75      0.75        20
+                    drinking       0.87      0.83      0.85        24
+             feeding_a_horse       0.95      1.00      0.98        20
+                     fishing       0.94      0.91      0.93        35
+               fixing_a_bike       0.70      1.00      0.82        14
+                fixing_a_car       1.00      0.91      0.95        22
+                   gardening       0.72      1.00      0.84        13
+         holding_an_umbrella       0.92      0.94      0.93        36
+                     jumping       0.83      0.79      0.81        38
+looking_through_a_microscope       0.85      1.00      0.92        23
+ looking_through_a_telescope       0.86      0.75      0.80        24
+                     phoning       0.76      0.78      0.77        32
+              playing_guitar       1.00      0.94      0.97        31
+              playing_violin       0.96      0.96      0.96        28
+              pouring_liquid       0.64      0.50      0.56        18
+              pushing_a_cart       0.96      0.85      0.90        27
+                     reading       0.67      0.94      0.78        17
+               riding_a_bike       0.90      0.95      0.93        20
+              riding_a_horse       1.00      1.00      1.00        23
+               rowing_a_boat       0.96      1.00      0.98        22
+                     running       0.71      0.86      0.77        28
+           shooting_an_arrow       0.90      0.90      0.90        21
+                     smoking       0.86      0.68      0.76        28
+               taking_photos       0.67      0.64      0.65        25
+             texting_message       0.65      0.65      0.65        26
+             throwing_frisby       0.77      0.94      0.85        18
+            using_a_computer       0.67      0.70      0.68        20
+             walking_the_dog       0.96      0.92      0.94        25
+              washing_dishes       0.64      0.82      0.72        11
+                 watching_TV       0.90      0.97      0.93        29
+                waving_hands       0.71      0.62      0.67        24
+          writing_on_a_board       1.00      1.00      1.00        11
+           writing_on_a_book       0.86      0.76      0.81        25
+
+                    accuracy                           0.85       954
+                   macro avg       0.85      0.85      0.85       954
+                weighted avg       0.86      0.85      0.85       954
+
+Weighted  Precision: 0.8566 | Recall: 0.8512 | F1: 0.8504

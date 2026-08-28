@@ -1,30 +1,30 @@
+import torch
 import torch.nn as nn
 import torch.utils.model_zoo as model_zoo
 
 
 class VGG16(nn.Module):
     def __init__(self, num_classes=1000, init_weights=True):
-        super().__init__()
+        super(VGG16, self).__init__()
         self.features = nn.Sequential(
-            # Block 1
             nn.Conv2d(3, 64, kernel_size=3, padding=1), nn.ReLU(inplace=True),
             nn.Conv2d(64, 64, kernel_size=3, padding=1), nn.ReLU(inplace=True),
             nn.MaxPool2d(kernel_size=2, stride=2),
-            # Block 2
+
             nn.Conv2d(64, 128, kernel_size=3, padding=1), nn.ReLU(inplace=True),
             nn.Conv2d(128, 128, kernel_size=3, padding=1), nn.ReLU(inplace=True),
             nn.MaxPool2d(kernel_size=2, stride=2),
-            # Block 3
+
             nn.Conv2d(128, 256, kernel_size=3, padding=1), nn.ReLU(inplace=True),
             nn.Conv2d(256, 256, kernel_size=3, padding=1), nn.ReLU(inplace=True),
             nn.Conv2d(256, 256, kernel_size=3, padding=1), nn.ReLU(inplace=True),
             nn.MaxPool2d(kernel_size=2, stride=2),
-            # Block 4
+
             nn.Conv2d(256, 512, kernel_size=3, padding=1), nn.ReLU(inplace=True),
             nn.Conv2d(512, 512, kernel_size=3, padding=1), nn.ReLU(inplace=True),
             nn.Conv2d(512, 512, kernel_size=3, padding=1), nn.ReLU(inplace=True),
             nn.MaxPool2d(kernel_size=2, stride=2),
-            # Block 5
+
             nn.Conv2d(512, 512, kernel_size=3, padding=1), nn.ReLU(inplace=True),
             nn.Conv2d(512, 512, kernel_size=3, padding=1), nn.ReLU(inplace=True),
             nn.Conv2d(512, 512, kernel_size=3, padding=1), nn.ReLU(inplace=True),
@@ -41,7 +41,8 @@ class VGG16(nn.Module):
     def forward(self, x):
         x = self.features(x)
         x = x.view(x.size(0), -1)
-        return self.classifier(x)
+        x = self.classifier(x)
+        return x
 
     def _initialize_weights(self):
         for m in self.modules():
@@ -58,7 +59,6 @@ class VGG16(nn.Module):
 
 
 def make_vgg16(num_classes):
-    """VGG-16 with ImageNet pretrained weights, classifier head replaced for num_classes."""
     model = VGG16(num_classes=1000)
     pretrained_weights = model_zoo.load_url('https://download.pytorch.org/models/vgg16-397923af.pth')
     model.load_state_dict(pretrained_weights)

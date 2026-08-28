@@ -1,69 +1,80 @@
 import os
 
-DATA_DIR = os.environ.get('HAR_DATA_DIR', 'JPEGImages')
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-CLASSES = [
-    'Applauding', 'Blowing_Bubbles', 'Brushing_Teeth', 'Cleaning_The_Floor',
-    'Climbing', 'Cooking', 'Cutting_Trees', 'Cutting_Vegetables',
-    'Drinking', 'Feeding_a_horse', 'Fishing', 'Fixing_a_bike',
-    'Fixing_a_Car', 'Gardening', 'Holding_an_Umbrella', 'Jumping',
-    'Looking_through_a_Microscope', 'Looking_through_a_Telescope',
-    'Phoning', 'Playing_Guitar', 'Playing_Violin', 'Pouring_Liquid',
-    'Pushing_a_Cart', 'Reading', 'Riding_a_Bike', 'Riding_a_Horse',
-    'Rowing_a_Boat', 'Running', 'Shooting_an_Arrow', 'Smoking',
-    'Taking_Photos', 'Texting_Message', 'Throwing_Frisby',
-    'Using_a_Computer', 'Walking_the_dog', 'Washing_Dishes',
-    'Watching_TV', 'Waving_Hands', 'Writing_on_a_Board', 'Writing_on_a_Book',
-]
+# ── Paths ─────────────────────────────────────────────────────────────────────
+DATA_DIR        = os.path.join(BASE_DIR, "data", "JPEGImages")
+CHECKPOINTS_DIR = os.path.join(BASE_DIR, "checkpoints")
 
-NUM_CLASSES = len(CLASSES)  # 40
-
-IMG_SIZE = 224
-MEAN = [0.485, 0.456, 0.406]
-STD = [0.229, 0.224, 0.225]
-
+# ── Data split ────────────────────────────────────────────────────────────────
 TRAIN_RATIO = 0.75
-VAL_RATIO = 0.15
-TEST_RATIO = 0.10
-BATCH_SIZE = 32
+VAL_RATIO   = 0.15   # test = remaining 0.10
 
-# Hyperparameters used in the research paper experiments
+# ── Training ──────────────────────────────────────────────────────────────────
+BATCH_SIZE          = 32
+SEED                = 42
+EARLY_STOP_PATIENCE = 10   # increased — cosine schedule needs more room
+
+# ── Inference ─────────────────────────────────────────────────────────────────
+CONFIDENCE_THRESHOLD = 0.50   # below this → "Unknown" in predict.py
+
+# ── Per-model hyperparameters ─────────────────────────────────────────────────
+#
+# Two-stage fine-tuning strategy (all pretrained-backbone models):
+#   Stage 1  — freeze backbone, train head only with high LR (fast convergence).
+#   Stage 2  — unfreeze all, fine-tune with low LR + cosine annealing.
+#
+# This typically adds 3-5 percentage points over single-stage training.
+#
 MODEL_CONFIGS = {
-    'vgg': {
-        'lr': 0.00001,
-        'weight_decay': 1e-4,
-        'num_epochs': 10,
-        'pretrained': True,
+    "vgg16": {
+        # Stage 1: head warmup
+        "lr_head":         1e-3,
+        "epochs_head":     5,
+        # Stage 2: full fine-tune
+        "lr_backbone":     5e-5,
+        "weight_decay":    1e-4,
+        "num_epochs":      45,   # cosine T_max
+        "mixup_alpha":     0.3,  # Mixup interpolation strength (0 = off)
     },
-    'resnet': {
-        'lr': 0.0001,
-        'weight_decay': 1e-4,
-        'num_epochs': 10,
-        'pretrained': True,
+    "resnet50": {
+        "lr_head":         1e-3,
+        "epochs_head":     5,
+        "lr_backbone":     5e-5,
+        "weight_decay":    1e-4,
+        "num_epochs":      45,
+        "mixup_alpha":     0.4,
     },
-    'densenet': {
-        'lr': 0.001,
-        'weight_decay': 1e-5,
-        'num_epochs': 15,
-        'pretrained': False,
-        'dropout_prob': 0.5,
+    "densenet": {
+        "lr_head":         1e-3,
+        "epochs_head":     5,
+        "lr_backbone":     3e-5,
+        "weight_decay":    1e-4,
+        "num_epochs":      45,
+        "mixup_alpha":     0.4,
     },
-    'googlenet': {
-        'lr': 0.001,
-        'weight_decay': 1e-5,
-        'num_epochs': 15,
-        'pretrained': False,
+    "googlenet": {
+        "lr_head":         1e-3,
+        "epochs_head":     5,
+        "lr_backbone":     5e-5,
+        "weight_decay":    1e-4,
+        "num_epochs":      45,
+        "mixup_alpha":     0.3,
     },
-    'pretrained_googlenet': {
-        'lr': 0.0001,
-        'weight_decay': 0.0,
-        'num_epochs': 10,
-        'pretrained': True,
+    "pretrained_googlenet": {
+        "lr_head":         1e-3,
+        "epochs_head":     5,
+        "lr_backbone":     5e-5,
+        "weight_decay":    1e-4,
+        "num_epochs":      45,
+        "mixup_alpha":     0.3,
     },
-    'pretrained_densenet': {
-        'lr': 0.0001,
-        'weight_decay': 0.0,
-        'num_epochs': 10,
-        'pretrained': True,
+    "pretrained_densenet": {
+        "lr_head":         1e-3,
+        "epochs_head":     5,
+        "lr_backbone":     3e-5,
+        "weight_decay":    1e-4,
+        "num_epochs":      45,
+        "mixup_alpha":     0.4,
     },
 }

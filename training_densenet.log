@@ -1,0 +1,146 @@
+Device: cuda  |  AMP: enabled
+Classes (40): ['applauding', 'blowing_bubbles', 'brushing_teeth', 'cleaning_the_floor', 'climbing', 'cooking', 'cutting_trees', 'cutting_vegetables', 'drinking', 'feeding_a_horse', 'fishing', 'fixing_a_bike', 'fixing_a_car', 'gardening', 'holding_an_umbrella', 'jumping', 'looking_through_a_microscope', 'looking_through_a_telescope', 'phoning', 'playing_guitar', 'playing_violin', 'pouring_liquid', 'pushing_a_cart', 'reading', 'riding_a_bike', 'riding_a_horse', 'rowing_a_boat', 'running', 'shooting_an_arrow', 'smoking', 'taking_photos', 'texting_message', 'throwing_frisby', 'using_a_computer', 'walking_the_dog', 'washing_dishes', 'watching_TV', 'waving_hands', 'writing_on_a_board', 'writing_on_a_book']
+Train: 7149 | Val: 1429 | Test: 954
+
+=================================================================
+  DENSENET
+=================================================================
+  Parameters: 6,994,856 total
+
+  [Stage 1] Freeze backbone  |  epochs=5  lr=1e-03
+  Trainable params (head only): 41,000
+  [S1] Ep   1/5  lr=1.00e-03  Train 0.2171  Val 0.5661
+    ** Best saved  val_acc=0.5661
+  [S1] Ep   2/5  lr=1.00e-03  Train 0.3894  Val 0.6725
+    ** Best saved  val_acc=0.6725
+  [S1] Ep   3/5  lr=1.00e-03  Train 0.4285  Val 0.6781
+    ** Best saved  val_acc=0.6781
+  [S1] Ep   4/5  lr=1.00e-03  Train 0.4487  Val 0.6914
+    ** Best saved  val_acc=0.6914
+  [S1] Ep   5/5  lr=1.00e-03  Train 0.4489  Val 0.7187
+    ** Best saved  val_acc=0.7187
+
+  [Stage 2] Unfreeze all  |  epochs=45  lr=3e-05  mixup=0.4
+  Trainable params (all): 6,994,856
+  [S2] Ep   1/45  lr=3.00e-05  Train 0.2536  Val 0.7579
+    ** Best saved  val_acc=0.7579
+  [S2] Ep   2/45  lr=3.00e-05  Train 0.2722  Val 0.7894
+    ** Best saved  val_acc=0.7894
+  [S2] Ep   3/45  lr=2.99e-05  Train 0.2827  Val 0.7992
+    ** Best saved  val_acc=0.7992
+  [S2] Ep   4/45  lr=2.97e-05  Train 0.3066  Val 0.8034
+    ** Best saved  val_acc=0.8034
+  [S2] Ep   5/45  lr=2.94e-05  Train 0.3131  Val 0.8034
+  [S2] Ep   6/45  lr=2.91e-05  Train 0.3027  Val 0.8237
+    ** Best saved  val_acc=0.8237
+  [S2] Ep   7/45  lr=2.87e-05  Train 0.3339  Val 0.8272
+    ** Best saved  val_acc=0.8272
+  [S2] Ep   8/45  lr=2.83e-05  Train 0.3535  Val 0.8286
+    ** Best saved  val_acc=0.8286
+  [S2] Ep   9/45  lr=2.77e-05  Train 0.3690  Val 0.8293
+    ** Best saved  val_acc=0.8293
+  [S2] Ep  10/45  lr=2.71e-05  Train 0.3529  Val 0.8328
+    ** Best saved  val_acc=0.8328
+  [S2] Ep  11/45  lr=2.65e-05  Train 0.3594  Val 0.8383
+    ** Best saved  val_acc=0.8383
+  [S2] Ep  12/45  lr=2.58e-05  Train 0.3679  Val 0.8258
+  [S2] Ep  13/45  lr=2.51e-05  Train 0.3658  Val 0.8369
+  [S2] Ep  14/45  lr=2.43e-05  Train 0.3784  Val 0.8404
+    ** Best saved  val_acc=0.8404
+  [S2] Ep  15/45  lr=2.34e-05  Train 0.3826  Val 0.8418
+    ** Best saved  val_acc=0.8418
+  [S2] Ep  16/45  lr=2.25e-05  Train 0.3479  Val 0.8376
+  [S2] Ep  17/45  lr=2.16e-05  Train 0.3834  Val 0.8446
+    ** Best saved  val_acc=0.8446
+  [S2] Ep  18/45  lr=2.07e-05  Train 0.3466  Val 0.8404
+  [S2] Ep  19/45  lr=1.97e-05  Train 0.3869  Val 0.8418
+  [S2] Ep  20/45  lr=1.87e-05  Train 0.3919  Val 0.8453
+    ** Best saved  val_acc=0.8453
+  [S2] Ep  21/45  lr=1.76e-05  Train 0.3918  Val 0.8481
+    ** Best saved  val_acc=0.8481
+  [S2] Ep  22/45  lr=1.66e-05  Train 0.4015  Val 0.8523
+    ** Best saved  val_acc=0.8523
+  [S2] Ep  23/45  lr=1.56e-05  Train 0.3989  Val 0.8537
+    ** Best saved  val_acc=0.8537
+  [S2] Ep  24/45  lr=1.45e-05  Train 0.3756  Val 0.8572
+    ** Best saved  val_acc=0.8572
+  [S2] Ep  25/45  lr=1.35e-05  Train 0.4082  Val 0.8467
+  [S2] Ep  26/45  lr=1.25e-05  Train 0.3982  Val 0.8586
+    ** Best saved  val_acc=0.8586
+  [S2] Ep  27/45  lr=1.14e-05  Train 0.3406  Val 0.8579
+  [S2] Ep  28/45  lr=1.04e-05  Train 0.3963  Val 0.8565
+  [S2] Ep  29/45  lr=9.45e-06  Train 0.3936  Val 0.8628
+    ** Best saved  val_acc=0.8628
+  [S2] Ep  30/45  lr=8.50e-06  Train 0.4285  Val 0.8572
+  [S2] Ep  31/45  lr=7.58e-06  Train 0.4209  Val 0.8600
+  [S2] Ep  32/45  lr=6.69e-06  Train 0.4112  Val 0.8614
+  [S2] Ep  33/45  lr=5.85e-06  Train 0.4381  Val 0.8628
+  [S2] Ep  34/45  lr=5.05e-06  Train 0.4096  Val 0.8642
+    ** Best saved  val_acc=0.8642
+  [S2] Ep  35/45  lr=4.30e-06  Train 0.4066  Val 0.8600
+  [S2] Ep  36/45  lr=3.60e-06  Train 0.4322  Val 0.8614
+  [S2] Ep  37/45  lr=2.96e-06  Train 0.4043  Val 0.8677
+    ** Best saved  val_acc=0.8677
+  [S2] Ep  38/45  lr=2.37e-06  Train 0.3794  Val 0.8628
+  [S2] Ep  39/45  lr=1.85e-06  Train 0.3968  Val 0.8593
+  [S2] Ep  40/45  lr=1.39e-06  Train 0.4205  Val 0.8558
+  [S2] Ep  41/45  lr=1.00e-06  Train 0.4030  Val 0.8544
+  [S2] Ep  42/45  lr=6.79e-07  Train 0.4241  Val 0.8593
+  [S2] Ep  43/45  lr=4.27e-07  Train 0.3991  Val 0.8614
+  [S2] Ep  44/45  lr=2.45e-07  Train 0.3426  Val 0.8551
+  [S2] Ep  45/45  lr=1.36e-07  Train 0.4012  Val 0.8649
+C:\Users\karth\Desktop\MS\Sem 2\DL\Project\Human Action Recognition\train.py:337: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  ckpt = torch.load(ckpt_path, map_location=device)
+
+  Loaded best checkpoint  val_acc=0.8677
+Test Loss: 1.1681  Test Accuracy: 0.8585
+
+densenet — Classification Report:
+                              precision    recall  f1-score   support
+
+                  applauding       0.74      0.80      0.77        25
+             blowing_bubbles       0.96      0.88      0.92        26
+              brushing_teeth       0.65      0.87      0.74        15
+          cleaning_the_floor       0.95      0.86      0.90        22
+                    climbing       1.00      0.95      0.97        38
+                     cooking       0.86      0.80      0.83        30
+               cutting_trees       0.95      0.90      0.92        20
+          cutting_vegetables       0.87      0.65      0.74        20
+                    drinking       0.87      0.83      0.85        24
+             feeding_a_horse       0.87      1.00      0.93        20
+                     fishing       0.94      0.97      0.96        35
+               fixing_a_bike       0.75      0.86      0.80        14
+                fixing_a_car       0.81      0.95      0.88        22
+                   gardening       0.76      1.00      0.87        13
+         holding_an_umbrella       0.97      0.97      0.97        36
+                     jumping       0.92      0.89      0.91        38
+looking_through_a_microscope       0.96      1.00      0.98        23
+ looking_through_a_telescope       0.90      0.75      0.82        24
+                     phoning       0.74      0.72      0.73        32
+              playing_guitar       1.00      0.90      0.95        31
+              playing_violin       0.90      0.96      0.93        28
+              pouring_liquid       0.92      0.61      0.73        18
+              pushing_a_cart       1.00      0.85      0.92        27
+                     reading       0.64      0.94      0.76        17
+               riding_a_bike       0.87      1.00      0.93        20
+              riding_a_horse       0.96      1.00      0.98        23
+               rowing_a_boat       1.00      1.00      1.00        22
+                     running       0.76      0.89      0.82        28
+           shooting_an_arrow       0.90      0.90      0.90        21
+                     smoking       0.76      0.57      0.65        28
+               taking_photos       0.74      0.68      0.71        25
+             texting_message       0.72      0.69      0.71        26
+             throwing_frisby       0.83      0.83      0.83        18
+            using_a_computer       0.80      0.80      0.80        20
+             walking_the_dog       0.96      0.96      0.96        25
+              washing_dishes       0.45      0.82      0.58        11
+                 watching_TV       0.93      0.97      0.95        29
+                waving_hands       0.70      0.67      0.68        24
+          writing_on_a_board       1.00      1.00      1.00        11
+           writing_on_a_book       0.84      0.64      0.73        25
+
+                    accuracy                           0.86       954
+                   macro avg       0.85      0.86      0.85       954
+                weighted avg       0.87      0.86      0.86       954
+
+Weighted  Precision: 0.8673 | Recall: 0.8585 | F1: 0.8584
